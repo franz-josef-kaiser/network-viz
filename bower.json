@@ -1,0 +1,13 @@
+{
+	"name"            : "network-viz",
+	"ignore"          : [
+		".git",
+		"node_modules"
+	],
+	"dependencies"    : {
+		"html5boilerplate" : "git@github.com:h5bp/html5-boilerplate.git",
+		"sigmaja"          : "git@github.com:jacomyal/sigma.js.git"
+	},
+	"devDependencies" : {},
+	"private"         : true
+}

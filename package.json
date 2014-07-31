@@ -1,0 +1,29 @@
+{
+	"name"            : "network-viz",
+	"version"         : "0.1.0",
+	"description"     : "Network Visualisation tool that uses gexf files as a base",
+	"main"            : "server.js",
+	"dependencies"    : {
+		"http-server" : "~0.6.1"
+	},
+	"devDependencies" : {},
+	"scripts"         : {
+		"test"  : "echo \"Error: no test specified\" && exit 1",
+		"start" : "node server.js"
+	},
+	"repository"      : {
+		"type" : "git",
+		"url"  : "https://github.com/franz-josef-kaiser/network-viz"
+	},
+	"keywords"        : [
+		"sigma",
+		"network",
+		"visualization"
+	],
+	"author"          : "Franz Josef Kaiser",
+	"license"         : "MIT",
+	"bugs"            : {
+		"url" : "https://github.com/franz-josef-kaiser/network-viz/issues"
+	},
+	"homepage"        : "https://github.com/franz-josef-kaiser/network-viz"
+}
