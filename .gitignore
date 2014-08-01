@@ -29,7 +29,6 @@ composer.phar
 # GEXF / Graph
 *.gexf
 /graphs/*.gexf
-!/graphs/.gitkeep
 
 # Let's keep some folders so people get into it without a full setup
 !.gitkeep
