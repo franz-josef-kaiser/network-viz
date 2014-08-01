@@ -21,7 +21,7 @@ if ( "undefined" === port ) {
 
 // Start server
 connect()
-	.use( serveStatic( __dirname ) )
+	.use( serveStatic( __dirname + '/www' ) )
 	.listen( port );
 
 sys.puts( sep + " Server Running on " + port + "\n" + sep );

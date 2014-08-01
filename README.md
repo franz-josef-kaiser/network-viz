@@ -13,7 +13,7 @@ Terminal / Bash / Shell / Console and enter the following (without the preceding
 
 This gives you a built application. To start your local server, please run
 
-	$ npm start
+	$ node server.js
 
 Your server should then be reachable on `http://localhost:8080`. If you have a port conflict,
 please redefine your port to a different one than `8080`.
