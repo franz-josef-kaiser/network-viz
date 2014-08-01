@@ -1,0 +1,16 @@
+{
+	"bower"  : "dev/assets/vendor",
+	"deploy" : "www",
+	"cache"  : {
+		"root" : ".cache",
+		"js"   : ".js",
+		"css"  : ".css"
+	},
+	"assets" : "assets",
+	"js" : {
+		"main" : "main"
+	},
+	"css" : {
+		"main" : "style"
+	}
+}
