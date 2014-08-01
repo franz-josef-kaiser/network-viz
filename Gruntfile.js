@@ -53,6 +53,7 @@ module.exports = function( grunt ) {
 			],
 			deploy  : [
 				'<%= config.deploy %>/<%= config.assets %>/*.{js,css}',
+				'<%= config.deploy %>/<%= config.graphs %>/*.gexf'
 			]
 		},
 
@@ -96,11 +97,13 @@ module.exports = function( grunt ) {
 
 		concat : {
 			options : {
-				separator : "\n"
+				separator : "\n\n"
 			},
 			css     : {
 				src : [
-					'<%= config.bower %>/normalize.css/normalize.css'
+					'<%= config.bower %>/normalize.css/normalize.css',
+					'<%= config.dev %>/<%= config.assets %>/css/style.css',
+					'<%= config.dev %>/<%= config.assets %>/css/sigma.css'
 				],
 				dest : '<%= config.cache.root %>/<%= config.cache.css %>/<%= config.css.main %>.css'
 			},
@@ -108,9 +111,13 @@ module.exports = function( grunt ) {
 				src : [
 					'<%= config.bower %>/angularjs/angular.min.js',
 					'<%= config.bower %>/sigma/build/sigma.min.js',
-					'<%= config.bower %>/sigma/build/plugins/sigma.parsers.gexf.min.js'
+					'<%= config.bower %>/sigma/build/plugins/sigma.plugins.animate.min.js',
+					'<%= config.bower %>/sigma/build/plugins/sigma.parsers.gexf.min.js',
+					'<%= config.dev %>/<%= config.assets %>/js/main.js',
+					'<%= config.dev %>/<%= config.assets %>/js/sigma.config.js'
 				],
-				dest : '<%= config.cache.root %>/<%= config.cache.js %>/<%= config.js.main %>.js'
+				//dest : '<%= config.cache.root %>/<%= config.cache.js %>/<%= config.js.main %>.js'
+				dest : '<%= config.deploy %>/<%= config.assets %>/<%= config.js.main %>.js'
 			}
 		},
 
@@ -122,15 +129,17 @@ module.exports = function( grunt ) {
 					sourceMapName    : '<%= config.deploy %>/<%= config.assets %>/<%= config.js.main %>.map',
 					preserveComments : false,
 					compress         : {
-						drop_console : true
+						// drop_console : true
 					}
 				},
 				files: [ {
 					expand  : true,
 					flatten : true,
 					filter  : 'isFile',
-					cwd     : '<%= config.cache.root %>/',
-					src     : '<%= config.cache.js %>/**/*.js',
+					//cwd     : '<%= config.cache.root %>/',
+					cwd     : '<%= config.deploy %>/<%= config.assets %>',
+					//src     : '<%= config.cache.js %>/**/*.js',
+					src     : '**/*.js',
 					dest    : '<%= config.deploy %>/<%= config.assets %>',
 					ext     : '.min.js'
 				} ]
@@ -148,6 +157,15 @@ module.exports = function( grunt ) {
 				cwd     : '<%= config.cache.root %>/<%= config.cache.css %>',
 				src     : [ '*.css' ],
 				dest    : '<%= config.cache.root %>/<%= config.cache.css %>',
+				ext     : '.css'
+			},
+			dev : {
+				expand  : true,
+				flatten : false,
+				filter  : 'isFile',
+				cwd     : '<%= config.dev %>/<%= config.assets %>/',
+				src     : [ '*.css' ],
+				dest    : '<%= config.dev %>/<%= config.assets %>',
 				ext     : '.css'
 			}
 		},
@@ -172,6 +190,14 @@ module.exports = function( grunt ) {
 				src     : [ '<%= config.dev %>/<%= config.tmpl.root %>/**/*.html' ],
 				dest    : '<%= config.deploy %>',
 				ext     : '.html'
+			},
+			graphs : {
+				expand  : true,
+				flatten : true,
+				filter  : 'isFile',
+				src     : [ '<%= config.graphs %>/**/*.gexf' ],
+				dest    : '<%= config.deploy %>/<%= config.graphs %>',
+				ext     : '.gexf'
 			}
 		}
 	} );
@@ -209,7 +235,8 @@ module.exports = function( grunt ) {
 		'uglify',
 		'csscomb',
 		'cssmin',
-		'copy:templates'
+		'copy:templates',
+		'copy:graphs'
 	] );
 
 // ====================

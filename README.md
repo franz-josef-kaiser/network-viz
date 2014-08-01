@@ -2,10 +2,19 @@
 
 A Gexf Network Visualization Webapplication.
 
+## How to
+
+The repository has a `gexf` directory. Simply put a file named `Untitled.gexf` there and
+run the steps mentioned in [install](#install).
+
 ## Install
 
-To install, you need [Nodejs](nodejs.org/). Clone or download the application. Then open your
-Terminal / Bash / Shell / Console and enter the following (without the preceding `$`):
+First download the repository with
+
+	$ git clone https://github.com/franz-josef-kaiser/network-viz.git
+
+To install, you need [Nodejs](nodejs.org/). Open your Terminal / Bash / Shell / Console and
+enter the following (without the preceding `$`):
 
 	$ npm install
 	$ npm run setup

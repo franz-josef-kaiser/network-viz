@@ -3,6 +3,7 @@
 	"dev"    : "dev",
 	"deploy" : "www",
 	"assets" : "assets",
+	"graphs" : "gexf",
 	"cache"  : {
 		"root" : ".cache",
 		"js"   : ".js",

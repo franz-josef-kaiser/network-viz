@@ -24,4 +24,8 @@ connect()
 	.use( serveStatic( __dirname + '/www' ) )
 	.listen( port );
 
-sys.puts( sep + " Server Running on " + port + "\n" + sep );
+sys.puts(
+	"-----------------------------------------\n"
+	+ " Server Running on http://localhost:" + port + "\n"
+	+ "-----------------------------------------\n"
+);
