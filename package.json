@@ -3,8 +3,7 @@
 	"version"      : "0.1.0",
 	"description"  : "Network Visualisation tool that uses gexf files as a base",
 	"main"         : "server.js",
-	"dependencies" : {
-	},
+	"dependencies" : {},
 	"devDependencies" : {
 		"http-server"           : "~0.6.1",
 		"connect"               : "^3.1.0",
@@ -13,7 +12,7 @@
 		"grunt"                 : "~0.4.2",
 
 		"bower"	                : "*",
-		"grunt-bower-task"	    : "~0.4.0",
+		"grunt-bower-task"      : "~0.4.0",
 
 		"grunt-shell"           : "^0.7.0",
 		"grunt-contrib-clean"	: "~0.6.0",

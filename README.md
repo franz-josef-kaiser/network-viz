@@ -16,6 +16,8 @@ First download the repository with
 To install, you need [Nodejs](nodejs.org/). Open your Terminal / Bash / Shell / Console and
 enter the following (without the preceding `$`):
 
+	$ cd network-viz
+
 	$ npm install
 	$ npm run setup
 	$ npm run build
