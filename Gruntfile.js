@@ -128,6 +128,7 @@ module.exports = function( grunt ) {
 				files: [ {
 					expand  : true,
 					flatten : true,
+					filter  : 'isFile',
 					cwd     : '<%= config.cache.root %>/',
 					src     : '<%= config.cache.js %>/**/*.js',
 					dest    : '<%= config.deploy %>/<%= config.assets %>',
@@ -143,6 +144,7 @@ module.exports = function( grunt ) {
 			cache : {
 				expand  : true,
 				flatten : false,
+				filter  : 'isFile',
 				cwd     : '<%= config.cache.root %>/<%= config.cache.css %>',
 				src     : [ '*.css' ],
 				dest    : '<%= config.cache.root %>/<%= config.cache.css %>',
@@ -154,17 +156,31 @@ module.exports = function( grunt ) {
 			cache : {
 				expand  : true,
 				flatten : true,
+				filter  : 'isFile',
 				cwd     : '<%= config.cache.root %>/<%= config.cache.css %>',
 				src     : [ '*.css', '!*.min.css' ],
 				dest    : '<%= config.deploy %>/<%= config.assets %>',
 				ext     : '.min.css'
+			}
+		},
+
+		copy : {
+			templates : {
+				expand  : true,
+				flatten : true,
+				filter  : 'isFile',
+				src     : [ '<%= config.dev %>/<%= config.tmpl.root %>/**/*.html' ],
+				dest    : '<%= config.deploy %>',
+				ext     : '.html'
 			}
 		}
 	} );
 
 // ====================
 
+	grunt.loadNpmTasks( 'grunt-contrib-copy' );
 	grunt.loadNpmTasks( 'grunt-contrib-clean' );
+
 	grunt.loadNpmTasks( 'grunt-bower-task' );
 	grunt.loadNpmTasks( 'grunt-shell' );
 	grunt.loadNpmTasks( 'grunt-bower-postinst' );
@@ -192,7 +208,8 @@ module.exports = function( grunt ) {
 		'concat',
 		'uglify',
 		'csscomb',
-		'cssmin'
+		'cssmin',
+		'copy:templates'
 	] );
 
 // ====================

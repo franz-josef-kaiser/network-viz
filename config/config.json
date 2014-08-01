@@ -1,16 +1,20 @@
 {
 	"bower"  : "dev/assets/vendor",
+	"dev"    : "dev",
 	"deploy" : "www",
+	"assets" : "assets",
 	"cache"  : {
 		"root" : ".cache",
 		"js"   : ".js",
 		"css"  : ".css"
 	},
-	"assets" : "assets",
 	"js" : {
 		"main" : "main"
 	},
 	"css" : {
 		"main" : "style"
+	},
+	"tmpl" : {
+		"root" : "templates"
 	}
 }

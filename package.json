@@ -14,8 +14,10 @@
 
 		"bower"	                : "*",
 		"grunt-bower-task"	    : "~0.4.0",
+
 		"grunt-shell"           : "^0.7.0",
 		"grunt-contrib-clean"	: "~0.6.0",
+		"grunt-contrib-copy"	: "~0.5.0",
 
 		"time-grunt"            : "~0.3.1",
 
@@ -32,10 +34,10 @@
 		"grunt-contrib-uglify"  : "~0.4.0"
 	},
 	"scripts"       : {
-		"test"    : "echo \"Error: no test specified\" && exit 1",
-		"start"   : "node server.js",
-		"install" : "grunt install",
-		"build"   : "grunt"
+		"test"  : "echo \"Error: no test specified\" && exit 1",
+		"start" : "node server.js",
+		"setup" : "grunt install",
+		"build" : "grunt"
 	},
 	"repository" : {
 		"type" : "git",
