@@ -9,7 +9,6 @@ Thumbs.db
 
 ## Package Managers
 /vendor/
-/www/vendor/
 /node_modules/
 /assets/bower/
 /lib/
@@ -19,7 +18,6 @@ composer.phar
 ## Project structure folders
 # tmp storage
 /.cache/
-/dev/templates/blocks/
 
 # Logs
 /log/
