@@ -10,7 +10,7 @@ Thumbs.db
 ## Package Managers
 /vendor/
 /node_modules/
-/assets/bower/
+/dev/assets/bower/
 /lib/
 
 composer.phar
