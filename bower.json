@@ -5,9 +5,13 @@
 		"node_modules"
 	],
 	"dependencies"    : {
-		"html5boilerplate" : "git@github.com:h5bp/html5-boilerplate.git",
-		"sigmaja"          : "git@github.com:jacomyal/sigma.js.git"
+		"normalize.css" : "~3.0.1",
+		"modernizr"     : "git@github.com:gruntjs/grunt-contrib-concat.git#master",
+		"angularjs"     : "~1.2.21",
+		"sigma"         : "~1.0.2"
 	},
-	"devDependencies" : {},
+	"devDependencies" : {
+		"html5boilerplate" : "git@github.com:h5bp/html5-boilerplate.git"
+	},
 	"private"         : true
 }

@@ -1,29 +1,55 @@
 {
-	"name"            : "network-viz",
-	"version"         : "0.1.0",
-	"description"     : "Network Visualisation tool that uses gexf files as a base",
-	"main"            : "server.js",
-	"dependencies"    : {
-		"http-server" : "~0.6.1"
+	"name"         : "network-viz",
+	"version"      : "0.1.0",
+	"description"  : "Network Visualisation tool that uses gexf files as a base",
+	"main"         : "server.js",
+	"dependencies" : {
 	},
-	"devDependencies" : {},
-	"scripts"         : {
-		"test"  : "echo \"Error: no test specified\" && exit 1",
-		"start" : "node server.js"
+	"devDependencies" : {
+		"http-server"           : "~0.6.1",
+		"connect"               : "^3.1.0",
+		"serve-static"          : "^1.4.3",
+
+		"grunt"                 : "~0.4.2",
+
+		"bower"	                : "*",
+		"grunt-bower-task"	    : "~0.4.0",
+		"grunt-shell"           : "^0.7.0",
+		"grunt-contrib-clean"	: "~0.6.0",
+
+		"time-grunt"            : "~0.3.1",
+
+		"grunt-jsonlint"        : "~1.0.4",
+
+		"grunt-uncss"           : "~0.3.4",
+		"grunt-csscomb"         : "~2.0.1",
+		"grunt-contrib-cssmin"  : "~0.10.0",
+		"grunt-contrib-csslint" : "~0.2.0",
+
+		"grunt-contrib-jshint"  : "~0.7.2",
+		"jshint-stylish"        : "~0.2.0",
+		"grunt-contrib-concat"  : "~0.4.0",
+		"grunt-contrib-uglify"  : "~0.4.0"
 	},
-	"repository"      : {
+	"scripts"       : {
+		"test"    : "echo \"Error: no test specified\" && exit 1",
+		"start"   : "node server.js",
+		"install" : "grunt install",
+		"build"   : "grunt"
+	},
+	"repository" : {
 		"type" : "git",
 		"url"  : "https://github.com/franz-josef-kaiser/network-viz"
 	},
-	"keywords"        : [
+	"keywords" : [
 		"sigma",
 		"network",
 		"visualization"
 	],
-	"author"          : "Franz Josef Kaiser",
-	"license"         : "MIT",
-	"bugs"            : {
+	"author"   : "Franz Josef Kaiser",
+	"license"  : "MIT",
+	"homepage" : "https://github.com/franz-josef-kaiser/network-viz",
+	"bugs"     : {
 		"url" : "https://github.com/franz-josef-kaiser/network-viz/issues"
-	},
-	"homepage"        : "https://github.com/franz-josef-kaiser/network-viz"
+	}
 }

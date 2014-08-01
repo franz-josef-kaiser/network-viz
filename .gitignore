@@ -12,6 +12,7 @@ Thumbs.db
 /www/vendor/
 /node_modules/
 /assets/bower/
+/lib/
 
 composer.phar
 
