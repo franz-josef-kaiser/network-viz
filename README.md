@@ -24,7 +24,13 @@ enter the following (without the preceding `$`):
 
 This gives you a built application. To start your local server, please run
 
+	$ npm start
+
+or directly run
+
 	$ node server.js
+
+(where the former actually just runs the later).
 
 Your server should then be reachable on `http://localhost:8080`. If you have a port conflict,
 please redefine your port to a different one than `8080`.

@@ -95,26 +95,26 @@ angular.module( 'networkviz', [] )
 					} );
 
 					s.bind( 'clickNode', function( e ) {
-							var nodeId = e.data.node.id,
-								toKeep = s.graph.neighbors( nodeId );
+						var nodeId = e.data.node.id,
+							toKeep = s.graph.neighbors( nodeId );
 
-							toKeep[ nodeId ] = e.data.node;
+						toKeep[ nodeId ] = e.data.node;
 
-							s.graph.nodes().forEach( function( n ) {
-								if ( toKeep[ n.id ] )
-									n.color = n.originalColor;
-								else
-									n.color = '#eee';
-							} );
+						s.graph.nodes().forEach( function( n ) {
+							if ( toKeep[ n.id ] )
+								n.color = n.originalColor;
+							else
+								n.color = '#eee';
+						} );
 
-							s.graph.edges().forEach( function( e ) {
-								if ( toKeep[ e.source ] && toKeep[ e.target ] )
-									e.color = e.originalColor;
-								else
-									e.color = '#eee';
-							} );
+						s.graph.edges().forEach( function( e ) {
+							if ( toKeep[ e.source ] && toKeep[ e.target ] )
+								e.color = e.originalColor;
+							else
+								e.color = '#eee';
+						} );
 
-							s.refresh();
+						s.refresh();
 					} );
 
 					s.bind( 'clickStage', function( e ) {

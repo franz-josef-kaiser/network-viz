@@ -198,6 +198,13 @@ module.exports = function( grunt ) {
 				src     : [ '<%= config.graphs %>/**/*.gexf' ],
 				dest    : '<%= config.deploy %>/<%= config.graphs %>',
 				ext     : '.gexf'
+			},
+			img : {
+				expand  : true,
+				flatten : true,
+				filter  : 'isFile',
+				src     : [ '<%= config.dev %>/<%= config.assets %>/img/**.*' ],
+				dest    : '<%= config.deploy %>/<%= config.assets %>/img'
 			}
 		}
 	} );
@@ -236,7 +243,8 @@ module.exports = function( grunt ) {
 		'csscomb',
 		'cssmin',
 		'copy:templates',
-		'copy:graphs'
+		'copy:graphs',
+		'copy:img'
 	] );
 
 // ====================
