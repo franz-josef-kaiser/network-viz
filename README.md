@@ -7,7 +7,7 @@
 ![Runs on Node](https://raw.githubusercontent.com/franz-josef-kaiser/network-viz/master/docs/assets/img/node-short-flat.png)
 
 [![Build Status](https://travis-ci.org/franz-josef-kaiser/network-viz.svg?branch=master)](https://travis-ci.org/franz-josef-kaiser/network-viz)
-![NPM Dependencies Status](http://img.shields.io/david/franz-josef-kaiser/network-viz.svg)
+![NPM Dependencies Status](https://david-dm.org/franz-josef-kaiser/network-viz.png?style=flat)
 
 A Gexf Network Visualization Web Application.
 
