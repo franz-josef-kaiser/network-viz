@@ -1,15 +1,17 @@
 # Network Viz
 
-![Built with Grunt](https://rawgit.com/pixel-cookers/built-with-badges/grunt/grunt-short-flat.png)
-![Built with Bower](https://rawgit.com/pixel-cookers/built-with-badges/grunt/bower-short-flat.png)
-![Built with Angular](https://rawgit.com/pixel-cookers/built-with-badges/grunt/angular-short-flat.png)
-![Built with Git VCS](https://rawgit.com/pixel-cookers/built-with-badges/grunt/git-short-flat.png)
-![Runs on Node](https://rawgit.com/pixel-cookers/built-with-badges/grunt/node-short-flat.png)
+![Built with Grunt](https://raw.githubusercontent.com/franz-josef-kaiser/network-viz/master/docs/assets/img/grunt-short-flat.png)
+![Built with Bower](https://raw.githubusercontent.com/franz-josef-kaiser/network-viz/master/docs/assets/img/bower-short-flat.png)
+![Built with Angular](https://raw.githubusercontent.com/franz-josef-kaiser/network-viz/master/docs/assets/img/angular-short-flat.png)
+![Built with Git VCS](https://raw.githubusercontent.com/franz-josef-kaiser/network-viz/master/docs/assets/img/git-short-flat.png)
+![Runs on Node](https://raw.githubusercontent.com/franz-josef-kaiser/network-viz/master/docs/assets/img/node-short-flat.png)
 
 [![Build Status](https://travis-ci.org/franz-josef-kaiser/network-viz.svg?branch=master)](https://travis-ci.org/franz-josef-kaiser/network-viz)
 ![NPM Dependencies Status](http://img.shields.io/david/franz-josef-kaiser/network-viz.svg)
 
 A Gexf Network Visualization Web Application.
+
+[![endorse](https://api.coderwall.com/franz-josef-kaiser/endorsecount.png)](https://coderwall.com/franz-josef-kaiser)
 
 ## How to
 
