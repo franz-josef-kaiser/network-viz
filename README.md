@@ -1,4 +1,8 @@
-# Network Viz
+# Network Viz [![Build Status](https://travis-ci.org/franz-josef-kaiser/network-viz.svg?branch=master)](https://travis-ci.org/franz-josef-kaiser/network-viz)
+ [![Dependency Status](https://david-dm.org/franz-josef-kaiser/network-viz.svg?style=flat)](https://david-dm.org/franz-josef-kaiser/network-viz)
+ [![devDependency Status](https://david-dm.org/franz-josef-kaiser/network-viz/dev-status.svg?style=flat)](https://david-dm.org/franz-josef-kaiser/network-viz#info=devDependencies)
+
+A Gexf Network Visualization Web Application. Built with:
 
 [![Built with Grunt](https://raw.githubusercontent.com/franz-josef-kaiser/network-viz/master/docs/assets/img/grunt-short-flat.png)](http://gruntjs.com)
  [![Built with Bower](https://raw.githubusercontent.com/franz-josef-kaiser/network-viz/master/docs/assets/img/bower-short-flat.png)](http://bower.io)
@@ -6,13 +10,7 @@
  [![Built with Git VCS](https://raw.githubusercontent.com/franz-josef-kaiser/network-viz/master/docs/assets/img/git-short-flat.png)](http://msysgit.github.io/)
  [![Runs on Node](https://raw.githubusercontent.com/franz-josef-kaiser/network-viz/master/docs/assets/img/node-short-flat.png)](http://nodejs.org)
 
-[![Build Status](https://travis-ci.org/franz-josef-kaiser/network-viz.svg?branch=master)](https://travis-ci.org/franz-josef-kaiser/network-viz)
-[![Dependency Status](https://david-dm.org/franz-josef-kaiser/network-viz.svg?style=flat)](https://david-dm.org/franz-josef-kaiser/network-viz)
-[![devDependency Status](https://david-dm.org/franz-josef-kaiser/network-viz/dev-status.svg?style=flat)](https://david-dm.org/franz-josef-kaiser/network-viz#info=devDependencies)
-
-A Gexf Network Visualization Web Application.
-
-[![endorse](https://api.coderwall.com/franz-josef-kaiser/endorsecount.png)](https://coderwall.com/franz-josef-kaiser)
+### Coderwall [![endorse](https://api.coderwall.com/franz-josef-kaiser/endorsecount.png)](https://coderwall.com/franz-josef-kaiser)
 
 ## How to
 
