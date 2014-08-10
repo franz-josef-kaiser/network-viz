@@ -35,8 +35,8 @@ module.exports = function( grunt ) {
 			dotfiles : {
 				src : [
 					'.*rc',
-					'<%= config.config %>/.*rc',
 					'*.json',
+					'<%= config.config %>/.*rc',
 					'<%= config.config %>/*.json'
 				]
 			}
@@ -44,7 +44,7 @@ module.exports = function( grunt ) {
 
 		clean : {
 			install : [
-				'<%= config.bower %>',
+				'<%= config.assets.bower %>',
 				'lib'
 			],
 			cache   : [
@@ -52,7 +52,7 @@ module.exports = function( grunt ) {
 				'<%= config.cache.root %>/<%= config.cache.js %>/*.js'
 			],
 			deploy  : [
-				'<%= config.deploy %>/<%= config.assets %>/*.{js,css}',
+				'<%= config.deploy %>/<%= config.assets.root %>/*.{js,css}',
 				'<%= config.deploy %>/<%= config.graphs %>/*.gexf'
 			]
 		},
@@ -77,7 +77,7 @@ module.exports = function( grunt ) {
 				options: {
 					stderr      : false,
 					execOptions : {
-						cwd : '<%= config.bower %>/modernizr'
+						cwd : '<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.bower %>/modernizr'
 					}
 				}
 			},
@@ -89,7 +89,7 @@ module.exports = function( grunt ) {
 				].join( '&&' ),
 				options: {
 					execOptions : {
-						cwd : '<%= config.bower %>/sigma'
+						cwd : '<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.bower %>/sigma'
 					}
 				}
 			}
@@ -101,23 +101,23 @@ module.exports = function( grunt ) {
 			},
 			css     : {
 				src : [
-					'<%= config.bower %>/normalize.css/normalize.css',
-					'<%= config.dev %>/<%= config.assets %>/css/style.css',
-					'<%= config.dev %>/<%= config.assets %>/css/sigma.css'
+					'<%= config.assets.bower %>/normalize.css/normalize.css',
+					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.css %>/style.css',
+					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.css %>/sigma.css'
 				],
 				dest : '<%= config.cache.root %>/<%= config.cache.css %>/<%= config.css.main %>.css'
 			},
 			js      : {
 				src : [
-					'<%= config.bower %>/angularjs/angular.min.js',
-					'<%= config.bower %>/sigma/build/sigma.min.js',
-					'<%= config.bower %>/sigma/build/plugins/sigma.plugins.animate.min.js',
-					'<%= config.bower %>/sigma/build/plugins/sigma.parsers.gexf.min.js',
-					'<%= config.dev %>/<%= config.assets %>/js/main.js',
-					'<%= config.dev %>/<%= config.assets %>/js/sigma.config.js'
+					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.bower %>/angularjs/angular.min.js',
+					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.bower %>/sigma/build/sigma.min.js',
+					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.bower %>/sigma/build/plugins/sigma.plugins.animate.min.js',
+					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.bower %>/sigma/build/plugins/sigma.parsers.gexf.min.js',
+					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.js %>/main.js',
+					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.js %>/sigma.config.js'
 				],
 				//dest : '<%= config.cache.root %>/<%= config.cache.js %>/<%= config.js.main %>.js'
-				dest : '<%= config.deploy %>/<%= config.assets %>/<%= config.js.main %>.js'
+				dest : '<%= config.deploy %>/<%= config.assets.root %>/<%= config.js.main %>.js'
 			}
 		},
 
@@ -126,7 +126,7 @@ module.exports = function( grunt ) {
 				options : {
 					report           : 'gzip',
 					sourceMap        : true,
-					sourceMapName    : '<%= config.deploy %>/<%= config.assets %>/<%= config.js.main %>.map',
+					sourceMapName    : '<%= config.deploy %>/<%= config.assets.root %>/<%= config.js.main %>.map',
 					preserveComments : false,
 					compress         : {
 						// drop_console : true
@@ -137,10 +137,10 @@ module.exports = function( grunt ) {
 					flatten : true,
 					filter  : 'isFile',
 					//cwd     : '<%= config.cache.root %>/',
-					cwd     : '<%= config.deploy %>/<%= config.assets %>',
+					cwd     : '<%= config.deploy %>/<%= config.assets.root %>',
 					//src     : '<%= config.cache.js %>/**/*.js',
 					src     : '**/*.js',
-					dest    : '<%= config.deploy %>/<%= config.assets %>',
+					dest    : '<%= config.deploy %>/<%= config.assets.root %>',
 					ext     : '.min.js'
 				} ]
 			}
@@ -163,10 +163,18 @@ module.exports = function( grunt ) {
 				expand  : true,
 				flatten : false,
 				filter  : 'isFile',
-				cwd     : '<%= config.dev %>/<%= config.assets %>/',
+				cwd     : '<%= config.dev %>/<%= config.assets.root %>/',
 				src     : [ '*.css' ],
-				dest    : '<%= config.dev %>/<%= config.assets %>',
+				dest    : '<%= config.dev %>/<%= config.assets.root %>',
 				ext     : '.css'
+			}
+		},
+
+		uncss : {
+			files : {
+				'<%= config.cache.root %>/<%= config.cache.css %>/<%= config.css.main %>.css' : [
+					'<%= config.cache.root %>/<%= config.cache.tmpl %>/*.html'
+				]
 			}
 		},
 
@@ -177,7 +185,7 @@ module.exports = function( grunt ) {
 				filter  : 'isFile',
 				cwd     : '<%= config.cache.root %>/<%= config.cache.css %>',
 				src     : [ '*.css', '!*.min.css' ],
-				dest    : '<%= config.deploy %>/<%= config.assets %>',
+				dest    : '<%= config.deploy %>/<%= config.assets.root %>',
 				ext     : '.min.css'
 			}
 		},
@@ -203,8 +211,38 @@ module.exports = function( grunt ) {
 				expand  : true,
 				flatten : true,
 				filter  : 'isFile',
-				src     : [ '<%= config.dev %>/<%= config.assets %>/img/**.*' ],
-				dest    : '<%= config.deploy %>/<%= config.assets %>/img'
+				src     : [ '<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.img %>/**.*' ],
+				dest    : '<%= config.deploy %>/<%= config.assets.root %>/<%= config.assets.img %>'
+			}
+		},
+
+		watch : {
+			scripts : {
+				options : {
+					spawn      : false,
+					dateFormat : function( time ) {
+						grunt.log.writeln( 'Finished in ' + time );
+					}
+				},
+				cwd     : '<%= config.dev %>/<%= config.assets.root %>/',
+				files   : [
+					'<%= config.assets.js %>/**/*.js',
+					'<%= config.assets.css %>/**/*.css',
+					'<%= config.assets.img %>/**/*.*',
+					'<%= config.assets.tmpl %>/**/*.html'
+				],
+				tasks   : [
+					'clean:cache',
+					'clean:deploy',
+					'jsonlint',
+					'concat',
+					'uglify',
+					'csscomb',
+					'cssmin',
+					'copy:templates',
+					'copy:graphs',
+					'copy:img'
+				]
 			}
 		}
 	} );
@@ -222,7 +260,7 @@ module.exports = function( grunt ) {
 
 	grunt.loadNpmTasks( 'grunt-contrib-concat' );
 
-	grunt.loadNpmTasks( 'grunt-uncss' );
+	//grunt.loadNpmTasks( 'grunt-uncss' );
 	grunt.loadNpmTasks( 'grunt-csscomb' );
 	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
 	grunt.loadNpmTasks( 'grunt-contrib-csslint' );
@@ -241,6 +279,7 @@ module.exports = function( grunt ) {
 		'concat',
 		'uglify',
 		'csscomb',
+		//'uncss',
 		'cssmin',
 		'copy:templates',
 		'copy:graphs',
