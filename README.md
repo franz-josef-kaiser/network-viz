@@ -1,5 +1,7 @@
 # Network Viz [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
+[![Build Status](https://travis-ci.org/franz-josef-kaiser/network-viz.svg?branch=master)](https://travis-ci.org/franz-josef-kaiser/network-viz)
+
 A Gexf Network Visualization Web Application.
 
 ## How to
