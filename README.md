@@ -6,6 +6,8 @@ A Gexf Network Visualization Web Application.
 
 ## Technology
 
+The software used to build this application.
+
 [![Built with Grunt](https://raw.githubusercontent.com/franz-josef-kaiser/network-viz/master/docs/assets/img/grunt-short-flat.png)](http://gruntjs.com)
  [![Built with Bower](https://raw.githubusercontent.com/franz-josef-kaiser/network-viz/master/docs/assets/img/bower-short-flat.png)](http://bower.io)
  [![Built with Angular](https://raw.githubusercontent.com/franz-josef-kaiser/network-viz/master/docs/assets/img/angular-short-flat.png)](http://angularjs.org)
@@ -32,7 +34,11 @@ enter the following (without the preceding `$`):
 	$ npm run setup
 	$ npm run build
 
-This gives you a built application. To start your local server, please run
+This gives you a built application.
+
+## Server
+
+To start your local server, please run
 
 	$ npm start
 
