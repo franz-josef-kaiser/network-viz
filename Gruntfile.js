@@ -43,16 +43,15 @@ module.exports = function( grunt ) {
 		},
 
 		clean : {
-			install : [
+			install    : [
 				'<%= config.assets.bower %>',
 				'lib'
 			],
-			cache   : [
-				'<%= config.cache.root %>/<%= config.cache.css %>/*.css',
-				'<%= config.cache.root %>/<%= config.cache.js %>/*.js'
-			],
-			deploy  : [
-				'<%= config.deploy %>/<%= config.assets.root %>/*.{js,css}',
+			cache_css  : [ '<%= config.cache.root %>/<%= config.cache.css %>/*.css' ],
+			cache_js   : [ '<%= config.cache.root %>/<%= config.cache.js %>/*.js' ],
+			cache_tmpl : [ '<%= config.cache.root %>/<%= config.cache.tmpl %>/*.html' ],
+			deploy     : [
+				'<%= config.deploy %>/<%= config.assets.root %>/*.{html,js,css}',
 				'<%= config.deploy %>/<%= config.graphs %>/*.gexf'
 			]
 		},
@@ -199,6 +198,13 @@ module.exports = function( grunt ) {
 				dest    : '<%= config.deploy %>',
 				ext     : '.html'
 			},
+			img : {
+				expand  : true,
+				flatten : true,
+				filter  : 'isFile',
+				src     : [ '<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.img %>/**.*' ],
+				dest    : '<%= config.deploy %>/<%= config.assets.root %>/<%= config.assets.img %>'
+			},
 			graphs : {
 				expand  : true,
 				flatten : true,
@@ -206,42 +212,52 @@ module.exports = function( grunt ) {
 				src     : [ '<%= config.graphs %>/**/*.gexf' ],
 				dest    : '<%= config.deploy %>/<%= config.graphs %>',
 				ext     : '.gexf'
-			},
-			img : {
-				expand  : true,
-				flatten : true,
-				filter  : 'isFile',
-				src     : [ '<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.img %>/**.*' ],
-				dest    : '<%= config.deploy %>/<%= config.assets.root %>/<%= config.assets.img %>'
 			}
 		},
 
 		watch : {
-			scripts : {
-				options : {
-					spawn      : false,
-					dateFormat : function( time ) {
-						grunt.log.writeln( 'Finished in ' + time );
-					}
-				},
-				cwd     : '<%= config.dev %>/<%= config.assets.root %>/',
-				files   : [
-					'<%= config.assets.js %>/**/*.js',
-					'<%= config.assets.css %>/**/*.css',
-					'<%= config.assets.img %>/**/*.*',
-					'<%= config.assets.tmpl %>/**/*.html'
-				],
+			styles    : {
+				options : { spawn : false },
+				cwd     : '<%= config.dev %>/<%= config.assets.root %>',
+				files   : [ '<%= config.assets.css %>/**/*.{css,less,scss}' ],
 				tasks   : [
-					'clean:cache',
-					'clean:deploy',
+					'clean:cache_css',
 					'jsonlint',
-					'concat',
-					'uglify',
+					'concat:css',
 					'csscomb',
-					'cssmin',
-					'copy:templates',
-					'copy:graphs',
+					'cssmin'
+				]
+			},
+			images    : {
+				options : { spawn : false },
+				cwd     : '<%= config.dev %>/<%= config.assets.root %>',
+				files   : [ '<%= config.assets.img %>/**/*.*' ],
+				tasks   : [
+					//'clean:cache_img',
+					'jsonlint',
 					'copy:img'
+				]
+			},
+			scripts   : {
+				options : { spawn : false },
+				cwd     : '<%= config.dev %>/<%= config.assets.root %>/',
+				files   : [ '<%= config.assets.js %>/**/*.js' ],
+				tasks   : [
+					'clean:cache_js',
+					'jsonlint',
+					'concat:js',
+					'uglify',
+					'copy:graphs',
+				]
+			},
+			templates : {
+				options : { spawn : false },
+				cwd     : '<%= config.dev %>/<%= config.assets.root %>',
+				files   : [ '<%= config.assets.tmpl %>/**/*.markdown,mustache,html' ],
+				tasks   : [
+					'clean:cache_tmpl',
+					'jsonlint',
+					'copy:templates',
 				]
 			}
 		}
@@ -249,12 +265,12 @@ module.exports = function( grunt ) {
 
 // ====================
 
+	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-contrib-copy' );
 	grunt.loadNpmTasks( 'grunt-contrib-clean' );
 
 	grunt.loadNpmTasks( 'grunt-bower-task' );
 	grunt.loadNpmTasks( 'grunt-shell' );
-	grunt.loadNpmTasks( 'grunt-bower-postinst' );
 
 	grunt.loadNpmTasks( 'grunt-jsonlint' );
 

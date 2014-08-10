@@ -37,7 +37,7 @@
 	},
 	"scripts"       : {
 		"test"  : "grunt",
-		"start" : "node server.js",
+		"start" : "node server.js && grunt watch",
 		"setup" : "grunt install",
 		"build" : "grunt"
 	},
