@@ -1,6 +1,6 @@
-# Network Viz
+# Network Viz [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
-A Gexf Network Visualization Webapplication.
+A Gexf Network Visualization Web Application.
 
 ## How to
 

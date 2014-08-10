@@ -15,6 +15,8 @@
 		"bower"	                : "*",
 		"grunt-bower-task"      : "~0.4.0",
 
+		"grunt-contrib-watch"   : "~0.6.1",
+
 		"grunt-shell"           : "^0.7.0",
 		"grunt-contrib-clean"	: "~0.6.0",
 		"grunt-contrib-copy"	: "~0.5.0",
@@ -23,7 +25,7 @@
 
 		"grunt-jsonlint"        : "~1.0.4",
 
-		"grunt-uncss"           : "~0.3.4",
+		"grunt-uncss"           : "~0.3.5",
 		"grunt-csscomb"         : "~2.0.1",
 		"grunt-contrib-cssmin"  : "~0.10.0",
 		"grunt-contrib-csslint" : "~0.2.0",
@@ -34,7 +36,7 @@
 		"grunt-contrib-uglify"  : "~0.5.1"
 	},
 	"scripts"       : {
-		"test"  : "echo \"Error: no test specified\" && exit 1",
+		"test"  : "grunt",
 		"start" : "node server.js",
 		"setup" : "grunt install",
 		"build" : "grunt"

@@ -7,7 +7,7 @@ angular.module( 'networkviz', [] )
 		};
 
 		angular.element( document ).ready( function () {
-
+console.log( angular.element( 'graph-container' ) );
 			sigma.classes.graph.addMethod( 'neighbors', function( nodeId ) {
 				var k,
 					neighbors = {},
