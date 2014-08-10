@@ -2,18 +2,28 @@
 	"bower"  : "dev/assets/vendor",
 	"dev"    : "dev",
 	"deploy" : "www",
-	"assets" : "assets",
+	"assets" : {
+		"root"  : "assets",
+		"bower" : "vendor",
+		"js"    : "js",
+		"css"   : "css",
+		"img"   : "img",
+		"tmpl"  : "templates"
+	},
 	"graphs" : "gexf",
 	"cache"  : {
 		"root" : ".cache",
 		"js"   : ".js",
-		"css"  : ".css"
+		"css"  : ".css",
+		"img"  : ".img",
+		"tmpl" : ".html",
+		"font" : ".font"
 	},
 	"js" : {
 		"main" : "main"
 	},
 	"css" : {
-		"main" : "style"
+		"main" : "styles"
 	},
 	"tmpl" : {
 		"root" : "templates"
