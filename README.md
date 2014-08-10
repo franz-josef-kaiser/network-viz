@@ -1,4 +1,4 @@
-# Network Viz [![Build Status](https://travis-ci.org/franz-josef-kaiser/network-viz.svg?branch=master)](https://travis-ci.org/franz-josef-kaiser/network-viz)
+# Network Viz [![Build Status](http://img.shields.io/travis/franz-josef-kaiser/network-viz.svg?style=flat)](https://travis-ci.org/franz-josef-kaiser/network-viz)
  [![Dependency Status](https://david-dm.org/franz-josef-kaiser/network-viz.svg?style=flat)](https://david-dm.org/franz-josef-kaiser/network-viz)
  [![devDependency Status](https://david-dm.org/franz-josef-kaiser/network-viz/dev-status.svg?style=flat)](https://david-dm.org/franz-josef-kaiser/network-viz#info=devDependencies)
 
