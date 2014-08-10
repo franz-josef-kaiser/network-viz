@@ -1,6 +1,14 @@
-# Network Viz [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+# Network Viz
+
+![Built with Grunt](http://pixel-cookers.github.io/built-with-badges/grunt/grunt-short-flat.png)
+![Built with Bower](http://pixel-cookers.github.io/built-with-badges/grunt/bower-short-flat.png)
+![Built with Angular](http://pixel-cookers.github.io/built-with-badges/grunt/angular-short-flat.png)
+![Built with Git VCS](http://pixel-cookers.github.io/built-with-badges/grunt/git-short-flat.png)
+![Runs on Node](http://pixel-cookers.github.io/built-with-badges/grunt/node-short-flat.png)
+![Runs on Node](http://pixel-cookers.github.io/built-with-badges/grunt/node-short-flat.png)
 
 [![Build Status](https://travis-ci.org/franz-josef-kaiser/network-viz.svg?branch=master)](https://travis-ci.org/franz-josef-kaiser/network-viz)
+![NPM Dependencies Status](http://img.shields.io/david/franz-josef-kaiser/network-viz.svg)
 
 A Gexf Network Visualization Web Application.
 
