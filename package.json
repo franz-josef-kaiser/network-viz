@@ -33,7 +33,9 @@
 		"grunt-contrib-jshint"  : "~0.7.2",
 		"jshint-stylish"        : "~0.2.0",
 		"grunt-contrib-concat"  : "~0.4.0",
-		"grunt-contrib-uglify"  : "~0.5.1"
+		"grunt-contrib-uglify"  : "~0.5.1",
+
+		"grunt-xml-validator"   : "~1.1.1"
 	},
 	"scripts"       : {
 		"test"  : "grunt",

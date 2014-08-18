@@ -110,13 +110,14 @@ module.exports = function( grunt ) {
 				src : [
 					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.bower %>/angularjs/angular.min.js',
 					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.bower %>/sigma/build/sigma.min.js',
+					//'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.bower %>/sigma/build/plugins/sigma.plugins.dragNodes.min.js',
 					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.bower %>/sigma/build/plugins/sigma.plugins.animate.min.js',
 					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.bower %>/sigma/build/plugins/sigma.parsers.gexf.min.js',
 					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.js %>/main.js',
 					'<%= config.dev %>/<%= config.assets.root %>/<%= config.assets.js %>/sigma.config.js'
 				],
-				//dest : '<%= config.cache.root %>/<%= config.cache.js %>/<%= config.js.main %>.js'
-				dest : '<%= config.deploy %>/<%= config.assets.root %>/<%= config.js.main %>.js'
+				dest : '<%= config.cache.root %>/<%= config.cache.js %>/<%= config.js.main %>.js'
+				//dest : '<%= config.deploy %>/<%= config.assets.root %>/<%= config.js.main %>.js'
 			}
 		},
 
@@ -124,8 +125,8 @@ module.exports = function( grunt ) {
 			deploy  : {
 				options : {
 					report           : 'gzip',
-					sourceMap        : true,
-					sourceMapName    : '<%= config.deploy %>/<%= config.assets.root %>/<%= config.js.main %>.map',
+					//sourceMap        : true,
+					//sourceMapName    : '<%= config.deploy %>/<%= config.assets.root %>/<%= config.js.main %>.min.map',
 					preserveComments : false,
 					compress         : {
 						// drop_console : true
@@ -135,11 +136,12 @@ module.exports = function( grunt ) {
 					expand  : true,
 					flatten : true,
 					filter  : 'isFile',
-					//cwd     : '<%= config.cache.root %>/',
-					cwd     : '<%= config.deploy %>/<%= config.assets.root %>',
-					//src     : '<%= config.cache.js %>/**/*.js',
-					src     : '**/*.js',
+					cwd     : '<%= config.cache.root %>/',
+					//cwd     : '<%= config.deploy %>/<%= config.assets.root %>',
+					src     : '<%= config.cache.js %>/**/*.js',
+					//src     : '**/*.js',
 					dest    : '<%= config.deploy %>/<%= config.assets.root %>',
+					//dest    : '<%= config.deploy %>/<%= config.assets.root %>',
 					ext     : '.min.js'
 				} ]
 			}
@@ -189,14 +191,20 @@ module.exports = function( grunt ) {
 			}
 		},
 
+
+		xml_validator : {
+			gexf : {
+				src : [ '<%= config.graphs %>/**/*.gexf' ]
+			}
+		},
+
 		copy : {
 			templates : {
 				expand  : true,
 				flatten : true,
 				filter  : 'isFile',
 				src     : [ '<%= config.dev %>/<%= config.tmpl.root %>/**/*.html' ],
-				dest    : '<%= config.deploy %>',
-				ext     : '.html'
+				dest    : '<%= config.deploy %>'
 			},
 			img : {
 				expand  : true,
@@ -210,55 +218,47 @@ module.exports = function( grunt ) {
 				flatten : true,
 				filter  : 'isFile',
 				src     : [ '<%= config.graphs %>/**/*.gexf' ],
-				dest    : '<%= config.deploy %>/<%= config.graphs %>',
-				ext     : '.gexf'
+				dest    : '<%= config.deploy %>/<%= config.graphs %>'
+			},
+			// Replacement for 'uglify' task during watch/dev as uglifying is time extensive
+			js_dev : {
+				expand  : true,
+				flatten : true,
+				filter  : 'isFile',
+				src     : [ '<%= config.cache.root %>/<%= config.cache.js %>/main.js' ],
+				dest    : '<%= config.deploy %>/<%= config.assets.root %>',
+				ext     : '.min.js'
 			}
 		},
 
 		watch : {
+			options   : {
+				spawn         : false,
+				cwd           : '<%= config.dev %>',
+				debounceDelay : 2500,
+				dateFormat    : function( time ) {
+					grunt.log.oklns( 'Finished in: ' + time + 'ms <<' );
+				}
+			},
 			styles    : {
-				options : { spawn : false },
-				cwd     : '<%= config.dev %>/<%= config.assets.root %>',
-				files   : [ '<%= config.assets.css %>/**/*.{css,less,scss}' ],
-				tasks   : [
-					'clean:cache_css',
-					'jsonlint',
-					'concat:css',
-					'csscomb',
-					'cssmin'
-				]
+				files   : [
+					'<%= config.assets.root %>/<%= config.assets.css %>/**/*.css',
+					'<%= config.assets.root %>/<%= config.assets.css %>/**/*.less',
+					'<%= config.assets.root %>/<%= config.assets.css %>/**/*.scss'
+				],
+				tasks   : [ 'clean:cache_css', 'jsonlint', 'concat:css', 'csscomb', 'cssmin' ]
 			},
 			images    : {
-				options : { spawn : false },
-				cwd     : '<%= config.dev %>/<%= config.assets.root %>',
-				files   : [ '<%= config.assets.img %>/**/*.*' ],
-				tasks   : [
-					//'clean:cache_img',
-					'jsonlint',
-					'copy:img'
-				]
+				files   : [ '<%= config.assets.root %>/<%= config.assets.img %>/**/*.*' ],
+				tasks   : [ /*'clean:cache_img',*/ 'jsonlint', 'copy:img' ]
 			},
 			scripts   : {
-				options : { spawn : false },
-				cwd     : '<%= config.dev %>/<%= config.assets.root %>/',
-				files   : [ '<%= config.assets.js %>/**/*.js' ],
-				tasks   : [
-					'clean:cache_js',
-					'jsonlint',
-					'concat:js',
-					'uglify',
-					'copy:graphs',
-				]
+				files   : [ '<%= config.assets.root %>/<%= config.assets.js %>/*.js' ],
+				tasks   : [ 'clean:cache_js', 'jsonlint', 'concat:js', 'copy:js_dev', 'copy:graphs' ]
 			},
 			templates : {
-				options : { spawn : false },
-				cwd     : '<%= config.dev %>/<%= config.assets.root %>',
-				files   : [ '<%= config.assets.tmpl %>/**/*.markdown,mustache,html' ],
-				tasks   : [
-					'clean:cache_tmpl',
-					'jsonlint',
-					'copy:templates',
-				]
+				files   : [ '<%= config.assets.tmpl %>/**/*.html' ],
+				tasks   : [ 'clean:cache_tmpl', 'jsonlint', 'copy:templates' ]
 			}
 		}
 	} );
@@ -284,12 +284,14 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 
+	grunt.loadNpmTasks( 'grunt-xml-validator' );
+
 // ====================
 
 	grunt.registerTask( 'install', [ 'clean:install', 'bower', 'shell' ] );
 
 	grunt.registerTask( 'default', [
-		'clean:cache',
+		'clean:cache_css', 'clean:cache_js', 'clean:cache_tmpl',
 		'clean:deploy',
 		'jsonlint',
 		'concat',
@@ -298,6 +300,7 @@ module.exports = function( grunt ) {
 		//'uncss',
 		'cssmin',
 		'copy:templates',
+		'xml_validator',
 		'copy:graphs',
 		'copy:img'
 	] );

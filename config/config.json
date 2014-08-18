@@ -1,5 +1,4 @@
 {
-	"bower"  : "dev/assets/vendor",
 	"dev"    : "dev",
 	"deploy" : "www",
 	"assets" : {

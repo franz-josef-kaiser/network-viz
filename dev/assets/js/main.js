@@ -1,14 +1,78 @@
+/*globals angular, sigma */
 "use strict";
 
 angular.module( 'networkviz', [] )
+	.directive( 'graph', [ '$log', function( $log ) {
+		return {
+			restrict    : 'E',
+			templateUrl : 'graph.html',
+			link        : function( $scope, elem, attr ) {
+				elem
+					.on( 'mouseenter', function( e ) {
+						e.stopPropagation();
+						e.preventDefault();
+						//console.log( 'IN!' );
+					} )
+					.on( 'mouseleave', function( e ) {
+						e.stopPropagation();
+						e.preventDefault();
+						//console.log( 'LEAVE' );
+					} );
+			}
+		}
+	} ] )
 	.controller( 'NetworkVizCtrl', [ '$scope', function( $scope ) {
 		$scope.container = {
 			id : 'sigma-container'
 		};
 
 		angular.element( document ).ready( function () {
-console.log( angular.element( 'graph-container' ) );
-			sigma.classes.graph.addMethod( 'neighbors', function( nodeId ) {
+			var container = angular.element( document.querySelector( 'graph-container' ) );
+			//var files = [];
+			// Check if the File APIs are supported.
+			/*if ( window.File && window.FileReader && window.FileList && window.Blob ) {
+				// Browser engine specific targetting
+				window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+				window.directoryEntry    = window.directoryEntry || window.webkitDirectoryEntry;
+
+				var files = [];
+				// Read .gexf files @TODO
+				window.requestFileSystem( window.TEMPORARY, 1024*1024,
+					function( fs ) {
+						fs.root.getDirectory(
+							'/gexf/',
+							{ create : false },
+							function( dirEntry ) {
+								var dirReader = dirEntry.createReader();
+								dirReader.readEntries( function( entries ) {
+									for( var i = 0; i < entries.length; i++ ) {
+										var entry = entries[i];
+										if ( entry.isDirectory ) {
+											console.log( 'Directory: ' + entry.fullPath );
+										}
+										else if ( entry.isFile ) {
+											console.log( 'File: ' + entry.fullPath );
+										}
+									}
+								} );
+							},
+							function( e ) {
+								console.log( '.gexf source folder | ' + e.message );
+							}
+						);
+						//console.log( this.files, fs );
+					},
+					function( e ) {
+						console.log( 'window.requestFileSystem | ' + e.message );
+					}
+				);
+			}
+			else {
+				console.log( 'The File APIs are not fully supported in this browser.' );
+			}*/
+
+
+			/*sigma.classes.graph.addMethod( 'neighbors', function( nodeId ) {
 				var k,
 					neighbors = {},
 					index = this.allNeighborsIndex[ nodeId ] || {};
@@ -17,7 +81,7 @@ console.log( angular.element( 'graph-container' ) );
 					neighbors[ k ] = this.nodesIndex[ k ];
 
 				return neighbors;
-			} );
+			} );*/
 
 			sigma.parsers.gexf(
 				'../gexf/Untitled.gexf',
@@ -25,11 +89,14 @@ console.log( angular.element( 'graph-container' ) );
 					container : 'sigma-container'
 				},
 				function( s ) {
-					var lines = 15,
-						prefix = 'file_';
+					var lines  = 15,
+						prefix = 'file_',
+						isDown = false,
+						frameID;
 
-					// Sort nodes:
-					/*s.graph.nodes = s.graph.nodes().sort( function( a, b ) {
+
+					// Sort by size
+					s.graph.nodes = s.graph.nodes().sort( function( a, b ) {
 						return + ( b.size - a.size ) * 2 - 1;
 					} );
 
@@ -47,45 +114,75 @@ console.log( angular.element( 'graph-container' ) );
 						node.color
 							= node.file_color
 							= node.color;
-					} );*/
+					} );
 
 					function animate( p ) {
 						if ( p !== prefix ) {
 							prefix = p || ( prefix === 'grid_' ? 'file_' : 'grid_' );
-							sigma.plugins.animate(
-								s,
+
+							sigma.plugins.animate( s,
 								{
 									color : prefix + 'color',
 									x     : prefix + 'x',
 									y     : prefix + 'y'
-								}
+								},
+								{}
 							);
 						}
 					}
 
-					var isDown = false,
-						frameID;
+					// Initialize sigma:
+					/*var s = new sigma({
+						graph: graph,
+						renderer: {
+							container: document.getElementById('graph-container'),
+							type: 'canvas'
+						},
+						settings: {
+							enableCamera: false,
+							enableHovering: false,
+							mouseEnabled: false,
+							drawLabels: false,
+							animationsTime: 500
+						}
+					});*/
 
-					/*angular.element( '#graph-container' )
+					$('#sigma-container').bind('mouseenter', function() {
+						animate('grid_');
+					}).bind('mouseleave', function() {
+						animate('file_');
+					}).bind('touchstart', function() {
+						isDown = true;
+						clearTimeout(frameID);
+						frameID = setTimeout(function() {
+							isDown = false;
+						}, 100);
+					}).bind('touchend', function() {
+						if (isDown)
+							animate();
+						isDown = false;
+					});
+					return;
+
+					// click rightClick mousedown mouseup mousemove mouseout doubleclick rightclick render
+					// clickStage doubleClickStage rightClickStage
+					// clickNode clickNodes doubleClickNode doubleClickNodes rightClickNode rightClickNodes
+					// overNode overNodes
+					// outNode
+					// clickEdge doubleClickEdge doubleClickEdges
+					s
+						.bind( 'click', function() {
+							console.log( 'mouse click' );
+						} )
 						.bind( 'mouseenter', function() {
-							animate( 'grid_' );
+							console.log( 'mouseenter' );
 						} )
 						.bind( 'mouseleave', function() {
-							animate( 'file_' );
+							console.log( 'mouseleave' );
 						} )
 						.bind( 'touchstart', function() {
-							isDown = true;
-							clearTimeout( frameID );
-							frameID = setTimeout( function() {
-								isDown = false;
-							}, 100 );
-						} )
-						.bind( 'touchend', function() {
-							if ( isDown ) {
-								animate();
-							}
-							isDown = false;
-						} );*/
+							console.log( 'touchstart' );
+						} );
 
 					s.graph.nodes().forEach( function( n ) {
 						n.originalColor = n.color;
@@ -132,10 +229,4 @@ console.log( angular.element( 'graph-container' ) );
 			);
 		} );
 
-	} ] )
-	.directive( 'graph', [ '$log', function( $log ) {
-		return {
-			restrict    : 'E',
-			templateUrl : 'graph.html'
-		}
 	} ] );
